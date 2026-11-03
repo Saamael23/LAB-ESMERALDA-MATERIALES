@@ -10,7 +10,6 @@ from plotly.subplots import make_subplots
 
 st.set_page_config(
     page_title="EMERALD LAB | Berilo + Cr³⁺",
-    page_icon="💎",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -33,7 +32,7 @@ st.markdown("""
     }
 </style>
 <div class="hero">
-  <h1>💎 EMERALD LAB</h1>
+  <h1>EMERALD LAB</h1>
   <p>Laboratorio virtual de berilo dopado con cromo · estructura cristalina y propiedades ópticas</p>
 </div>
 """, unsafe_allow_html=True)
@@ -340,7 +339,7 @@ luminosity = result["luminosity"]
 
 # ---------- Navegación ----------
 tab_lab, tab_structure, tab_light, tab_about = st.tabs([
-    "🧪 Laboratorio óptico", "🔬 Estructura 3D", "🌈 Experimento de luz", "ℹ️ Modelo y alcance"
+    "Laboratorio óptico", "Estructura 3D", "Experimento de luz", "Modelo y alcance"
 ])
 
 with tab_lab:
@@ -404,9 +403,15 @@ with tab_lab:
 with tab_structure:
     st.subheader("Representación tridimensional del berilo")
     st.plotly_chart(build_crystal_figure(concentration), use_container_width=True)
+    dot = '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:{c};margin-right:5px;vertical-align:middle;"></span>'
+    legend = " &nbsp;·&nbsp; ".join(
+        dot.format(c=c) + n for n, c in [
+            ("Si", "#F0B52B"), ("O", "#E64B4B"), ("Al", "#3478C8"),
+            ("Be", "#A66BE0"), ("Cr", "#168B4F")
+        ]
+    )
+    st.markdown(f"**Código de colores:** {legend}", unsafe_allow_html=True)
     st.markdown("""
-    **Código de colores:** 🟡 Si · 🔴 O · 🔵 Al · 🟣 Be · 🟢 Cr.
-
     La representación es esquemática y sirve para visualizar la sustitución conceptual de Al³⁺ por Cr³⁺.
     El número de sitios de cromo se amplifica visualmente para que el cambio pueda apreciarse; no representa
     una ocupación cristalográfica real ni una estructura refinada a partir de un archivo CIF.
